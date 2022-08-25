@@ -5,7 +5,7 @@ const generateToken = require('../utils/generateToken')
 
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { firstname, lastname, email, password } = req.body
+    const { firstName, lastName, email, password } = req.body
 
     const userExists = await User.findOne({ email })
     if (userExists) {
@@ -13,8 +13,8 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("user alreadey exists")
     }
     const user = await User.create({
-        firstname,
-        lastname,
+        firstName,
+        lastName,
         email,
         password
     })
@@ -22,8 +22,8 @@ const registerUser = asyncHandler(async (req, res) => {
     if (user) {
         res.status(201).json({
             _id: user._id,
-            firstname: user.firstname,
-            lastname: user.lastname,
+            firstName: user.firstName,
+            lastName: user.lastName,
             isAdmin: user.isAdmin,
             token:generateToken(user._id),
             email: user.email
@@ -44,8 +44,8 @@ const authUser = asyncHandler(async (req, res) => {
     if(user && (await user.matchPassword(password))){
         res.json({
             _id: user._id,
-            firstname: user.firstname,
-            lastname: user.lastname,
+            firstName: user.firstName,
+            lastName: user.lastName,
             isAdmin: user.isAdmin,
             email: user.email,
             password:user.password,

@@ -33,7 +33,7 @@ const Header = () => {
             <Nav className="me-auto">
             </Nav> 
             
-              {user ? <NavLink onClick={logout} to='/'>
+              {user ? <NavLink onClick={logout} to='/login'>
                 Logout
               </NavLink> : <NavLink to="/login">
                 Login
